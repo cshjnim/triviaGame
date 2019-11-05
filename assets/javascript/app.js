@@ -3,11 +3,12 @@ console.log("See this to try if this works")
 // jquery for game playing
 
 $(document).ready(function() {
-    var 
+    var trivia
 
     var userTotal = 0;
-    var wins = 0;
-    var losses = 0;
+    var correct = 0;
+    var incorrect = 0;
+    var unanswered = 0;
 
     //  Interval Demonstration
     var number = 30;
@@ -45,13 +46,13 @@ $(document).ready(function() {
     }
     //?? this better or should do in other way...? Q & A?...
     function won() {
-        wins++;
+        correct++;
         $("#numberWins").text(wins);
         reset();
     }
 
     function loss () {
-        losses++;
+        incorrect++;
         $("#numberLosses").text(losses);
         reset();
     }
