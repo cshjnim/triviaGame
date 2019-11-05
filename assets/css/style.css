@@ -1,0 +1,12 @@
+
+body {
+    background-image: url("../images/background.jpg");
+}
+
+div {
+    margin: 10px;
+    width: 35%;
+    padding: 10px;
+    background-color: #fad15f;
+}
+
