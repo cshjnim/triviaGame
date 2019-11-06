@@ -5,9 +5,18 @@ body {
 
 div {
     margin: 10px;
-    width: 35%;
+    width: 100%;
     padding: 10px;
-    background-color: #fad15f;
+    background-color: #fad15f;                    
     text-align: center;
+}
+
+.jumbotron{
+    background-color: #fad15f;
+}
+
+h1 {
+    font-family: fantasy;
+    color: rgb(82, 80, 80);
 }
 
