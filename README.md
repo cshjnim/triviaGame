@@ -22,11 +22,9 @@ In this assignment, You'll create a Trivia game using JavaScript for the logic a
 
 ### Option Two: Advanced Assignment (Timed Questions)
 
-![Advanced](Images/2-advanced.jpg)
-
 **[Click Here to Watch the demo](https://youtu.be/xhmmiRmxQ8Q)**.
 
-* You'll create a trivia game that shows only one question until the player answers it or their time runs out.
+* create a trivia game that shows only one question until the player answers it or their time runs out.
 
 * If the player selects the correct answer, show a screen congratulating them for choosing the right option. After a few seconds, display the next question -- do this without user input.
 
@@ -54,5 +52,3 @@ After completing the homework please add the piece to your portfolio. Make sure 
 * Remember to deploy your assignment to Github Pages.
 
 *If you have any questions about this project or the material we have covered, please post them in the community channels in slack so that your fellow developers can help you! If you're still having trouble, you can come to office hours for assistance from your instructor and TAs.
-
-  **Good Luck!**

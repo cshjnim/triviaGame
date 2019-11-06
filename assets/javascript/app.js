@@ -3,75 +3,18 @@ console.log("See this to try if this works")
 // jquery for game playing
 
 $(document).ready (function (){
-  var correct: 0;
-  var incorrect: 0;
-  var unanswered: 0;
-  var timer: 30;
-  var timerOn: false;
-  var timerId: '',
-
-  function startGame() {
-    //variable
-    trivia.currentSet = 0;
-    trivia.correct =0;
-    trivia.incorrect=0;
-    trivia.unanswered = 0;
-    clearInterval(trivia.timerId);
-    //how the page should display
-    $('#game').show();
-    $('#results').html('');
-    $('#timer').text(trivia.timer);
-    $('#start').hide();
-    $('#remaining-time').show();
-
-    trivia.nextQuestion ();
-  }
-
-  function nextQuestion (){
-    trivia.timer =30;
-    $('#timer').removeClass('last-seconds');
-  $('#timer').text(trivia.timer);
-  }
-
-  function guessChecker (){
-    var resultId;
-    var currentAnswer = Object.values(trivia.answers)[trivia.currentSet];
-
-    if () {
-
-    }
-    else {
-      
-    }
-  }
-
-  function timerRunning (){
-    if(trivia.timer > -1 && trivia.currentSet < Object.keys(trivia.qustions).length){
-      $('#timer').text(trivia.timer);
-      trivia.timer--;
-        if(trivia.timer === 4){
-          $('#timer').addClass('last-seconds');
-        }
-    }
-
-    else if(trivia.currentSet === Object.keys(trivia.questions).length){
-    
-      // adds results here
-      $('#results')
-        .html('<h3>Play again!</h3>'+
-        '<p>Correct: '+ trivia.correct +'</p>'+
-        '<p>Incorrect: '+ trivia.incorrect +'</p>'+
-        '<p>Unaswered: '+ trivia.unanswered +'</p>');
-      
-      $('#game').hide();
-      $('#start').show();
-
-  }
-
-  }
+  $("#start").on ("click", game.startGame);
 })
+  
+var game = {
+  correct: 0,
+  incorrect: 0,
+  unanswered: 0,
+  timer: 30,
+  timerOn: false,
+  timerId: '',
 
- // questions options and answers data
+  // questions options and answers data
  questions: {
   q1: 'Which actress has won the most Oscars?',
   q2: 'Which chess piece can only move diagonally?',
@@ -99,3 +42,73 @@ answers: {
   q6: 'Entertainment',
   q7: 'Seattle Mariners'
 },
+  
+  startGame : function() {
+    //variable
+    trivia.currentSet = 0;
+    trivia.correct =0;
+    trivia.incorrect=0;
+    trivia.unanswered = 0;
+    clearInterval(trivia.timerId);
+    //how the page should display
+    $('#game').show();
+    $('#results').html('');
+    $('#timer').text(trivia.timer);
+    $('#start').hide();
+    $('#remaining-time').show();
+
+    trivia.nextQuestion ();
+  },
+  
+  nextQuestion: function(){
+    trivia.timer =30;
+    $('#timer').removeClass('last-seconds');
+  $('#timer').text(trivia.timer);
+  },
+
+  guessChecker: function(){
+    var resultId;
+    var currentAnswer = Object.values(trivia.answers)[trivia.currentSet];
+    //if correct
+    if ($(this).text() === currentAnswer) {
+      $(this).addClass('btn-success').removeClass('btn-info');
+      trivia.correct++;
+      clearInterval(trivia.timerId);
+      resultId = setTimeout(trivia.guessResult, 1000);
+      $('#results').html('<h3>Correct!</h3>');
+    }
+    //if wrong
+    else {
+      $(this).addClass('btn-danger').removeClass('btn-info');
+    
+      trivia.incorrect++;
+      clearInterval(trivia.timerId);
+      resultId = setTimeout(trivia.guessResult, 1000);
+      $('#results').html('<h3>Wrong! Answer is: '+ currentAnswer +'</h3>');
+    }
+  },
+
+  timerRunning: function (){
+    if(trivia.timer > -1 && trivia.currentSet < Object.keys(trivia.qustions).length){
+      $('#timer').text(trivia.timer);
+      trivia.timer--;
+        if(trivia.timer === 4){
+          $('#timer').addClass('last-seconds');
+        }
+    
+
+    else if(trivia.currentSet === Object.keys(trivia.questions).length){
+    
+      // adds results here
+      $('#results')
+        .html('<h3>Play again!</h3>'+
+        '<p>Correct: '+ trivia.correct +'</p>'+
+        '<p>Incorrect: '+ trivia.incorrect +'</p>'+
+        '<p>Unaswered: '+ trivia.unanswered +'</p>');
+      
+      $('#game').hide();
+      $('#start').show();
+
+  }
+}
+}}
