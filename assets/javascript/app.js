@@ -3,7 +3,9 @@ console.log("See this to try if this works")
 // jquery for game playing
 
 $(document).ready (function (){
+  $("remaining-time").hide();
   $("#start").on ("click", game.startGame);
+  $(document).on("click", '.option',game.guessChecker);
 })
   
 var game = {
@@ -63,7 +65,17 @@ answers: {
   nextQuestion: function(){
     trivia.timer =30;
     $('#timer').removeClass('last-seconds');
-  $('#timer').text(trivia.timer);
+    $('#timer').text(trivia.timer);
+    if(!trivia.timerOn){
+      trivia.timerId = setInterval(trivia.timerRunning, 1000);
+    }
+    
+    var questionContent = Object.values(trivia.questions)[trivia.currentSet];
+    $('#question').text(questionContent);
+    var questionOptions = Object.values(trivia.options)[trivia.currentSet];
+    $.each(questionOptions, function(index, key){
+      $('#options').append($('<button class="option btn btn-info btn-lg">'+key+'</button>'));
+    })
   },
 
   guessChecker: function(){
@@ -95,7 +107,13 @@ answers: {
         if(trivia.timer === 4){
           $('#timer').addClass('last-seconds');
         }
-    
+        else if(trivia.timer === -1){
+          trivia.unanswered++;
+          trivia.result = false;
+          clearInterval(trivia.timerId);
+          resultId = setTimeout(trivia.guessResult, 1000);
+          $('#results').html('<h3>Out of time! The answer was '+ Object.values(trivia.answers)[trivia.currentSet] +'</h3>');
+        }
 
     else if(trivia.currentSet === Object.keys(trivia.questions).length){
     
